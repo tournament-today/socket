@@ -1,0 +1,23 @@
+<script src="/js/websocket.js"></script>
+<script src="/js/pusher-batch-auth.js"></script>
+<script>
+
+    $(function()
+    {
+        $('html').webSocket('init', '{{ config_get('socket::pusher.key') }}', {
+            encrypted: {% if config_get('socket::pusher.ssl') %}true{% else %}false{% endif %},
+            authEndpoint: '{{ route('Socket@auth') }}',
+            authTransport: 'buffered',
+            authDelay: 50,
+            auth: {
+                params: {
+                    '_token': '{{ csrf_token() }}'
+                }
+            }
+        }, {
+            'endpoint': {
+                'channels': '{{ route('Socket@channels') }}'
+            }
+        });
+    });
+</script>
