@@ -39,7 +39,7 @@ class Pusher
 	 * @return mixed
 	 * @todo support splitting per 100 channels
 	 */
-	public function __callStatic($method, $arguments)
+	public static function __callStatic($method, $arguments)
 	{
 		$p = static::getInstance();
 
